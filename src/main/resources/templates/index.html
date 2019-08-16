@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<head th:replace="fragments/header :: head"/>
+<body>
+<nav th:replace="fragments/header :: navbar(title='')"/>
+<div class="container">
+  <h1>Create Data in Operate</h1>
+  <hr/>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" href="/add-data">Create Instances</a>
+    <a class="list-group-item list-group-item-action" href="/create-workflow">
+      Create Workflows</a>
+    <a class="list-group-item list-group-item-action" href="/create-errors">
+      Create Error Cases</a>
+  </div>
+</div>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

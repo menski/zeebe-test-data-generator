@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>zeebe-instant-generator</artifactId>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
+      </plugin>
+      <plugin>
+        <artifactId>jib-maven-plugin</artifactId>
+        <configuration>
+          <to>
+            <image>docker.io/menski/zeebe-test-data-generator</image>
+          </to>
+        </configuration>
+        <groupId>com.google.cloud.tools</groupId>
+        <version>1.4.0</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-devtools</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <artifactId>elasticsearch-rest-high-level-client</artifactId>
+      <groupId>org.elasticsearch.client</groupId>
+      <version>6.8.2</version>
+    </dependency>
+    <dependency>
+      <artifactId>elasticsearch</artifactId>
+      <groupId>org.elasticsearch</groupId>
+      <version>6.8.2</version>
+    </dependency>
+    <dependency>
+      <artifactId>zeebe-protocol</artifactId>
+      <groupId>io.zeebe</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>zeebe-client-java</artifactId>
+      <groupId>io.zeebe</groupId>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>zeebe-bom</artifactId>
+        <groupId>io.zeebe</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>0.21.0-alpha1</version>
+      </dependency>
+      <dependency>
+        <artifactId>zeebe-bpmn-model</artifactId>
+        <groupId>io.zeebe</groupId>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <description>Instant generator for Zeebe</description>
+  <groupId>io.zeebe</groupId>
+  <modelVersion>4.0.0</modelVersion>
+  <name>zeebe-instant-generator</name>
+
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>2.1.7.RELEASE</version> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <java.version>11</java.version>
+  </properties>
+
+  <version>0.0.1-SNAPSHOT</version>
+
+</project>

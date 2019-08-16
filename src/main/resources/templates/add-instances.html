@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+
+<head th:replace="fragments/header :: head"/>
+<body>
+<nav th:replace="fragments/header :: navbar(title='Create Instances > Workflows in Operate')"/>
+<div class="container">
+  <h1>Workflows in Operate</h1>
+  <hr/>
+  <h5 style="font-size: 18px; margin-bottom: 20px;">Please select the workflow you would like to add instances.</h5>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" th:each="workflow: ${workflows}"
+       th:href="@{/add-instance(id=${workflow.key}, version=${workflow.value.lastVersion})}">
+      <span style="font-weight: 700;" th:text="${workflow.value.name}"/><span
+        th:text="${workflow.value.version}"/>
+    </a>
+  </div>
+</div>
+
+<script src="/jquery-3.3.1.slim.min.js"></script>
+<script src="/popper.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

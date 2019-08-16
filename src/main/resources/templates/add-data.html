@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+<head th:replace="fragments/header :: head"/>
+<body>
+
+<nav th:replace="fragments/header :: navbar(title='Create Instances')"/>
+<div class="container">
+  <h1>Create Instances</h1>
+  <hr/>
+  <div class="list-group">
+    <a class="list-group-item list-group-item-action" href="/add-instances">Create Instances in specific Workflow</a>
+    <a class="list-group-item list-group-item-action" href="/distribute-instances">Create Instances distributed to Workflows</a>
+  </div>
+</div>
+
+<script src="/jquery-3.3.1.slim.min.js"></script>
+<script src="/popper.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: head"/>
+<body>
+<nav th:replace="fragments/header :: navbar (title='Create Workflow')"/>
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col-4">
+      <h1>Create Workflow</h1>
+    </div>
+    <div class="col-4 text-right">
+      <button class="btn btn-outline-secondary" disabled id="buttonCreate" onclick="submit()"
+              type="button">Create Workflow
+      </button>
+      <button class="btn btn-outline-secondary" onclick="upload()" type="button">Upload Workflow
+      </button>
+    </div>
+  </div>
+  <form action="/deploy" enctype="multipart/form-data" hidden id="deployForm"
+        method="post">
+    <input id="bpmnFile" name="bpmnFile" onchange="deploy()" type="file">
+  </form>
+  <hr/>
+  <form action="/deploy-workflow" id="form" method="post">
+    <div class="form-group row" style="margin-bottom: 30px;">
+      <label class="col-sm-2 col-form-label" for="inputName">Workflow Name</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="inputName" name="workflowName"
+               onkeyup="workflowNameChanged()" placeholder="Name your workflow" type="text">
+      </div>
+    </div>
+
+    <div>
+
+      <ul class="nav nav-pills nav-fill" id="myTab" role="tablist" style="margin-bottom: 30px;">
+        <li class="nav-item">
+          <a aria-controls="flow-node" aria-selected="true" class="nav-link active"
+             data-toggle="tab"
+             href="#flow-node"
+             id="flow-node-tab" role="tab">Flow Nodes</a>
+        </li>
+        <li class="nav-item">
+          <a aria-controls="complexity" aria-selected="false" class="nav-link" data-toggle="tab"
+             href="#complexity"
+             id="complexity-tab" role="tab">Complexity</a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content" id="myTabContent">
+      <div aria-labelledby="flow-node-tab" class="tab-pane fade show active" id="flow-node"
+           role="tabpanel">
+        <div class="form-group row" th:each="flowNode: ${flowNodes}">
+          <label class="col-sm-2 col-form-label" th:for="'input'+${flowNode.name()}"
+                 th:text="${flowNode.displayName}"/>
+          <div class="col-sm-6">
+            <input class="form-control" min="0"
+                   onchange="checkNumbers()" th:id="'input'+${flowNode.name()}"
+                   th:name="${flowNode.name()}"
+                   type="number" value="0">
+          </div>
+        </div>
+      </div>
+      <div aria-labelledby="complexity-tab" class="tab-pane fade" id="complexity" role="tabpanel">
+        <div class="custom-control custom-switch" th:each="flowNode: ${complexities}">
+          <input class="custom-control-input" th:id="'input'+${flowNode.name()}"
+                 th:name="${flowNode.name()}"
+                 type="checkbox">
+          <label class="custom-control-label" th:for="'input'+${flowNode.name()}"
+                 th:text="${flowNode.displayName}"/>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function workflowNameChanged() {
+    var name = document.getElementById("inputName").value;
+    document.getElementById("buttonCreate").disabled = name == null || name === "";
+  }
+
+  function submit() {
+    document.getElementById("form").submit();
+  }
+
+  function upload() {
+    var elem = document.getElementById("bpmnFile");
+    if (elem && document.createEvent) {
+      var evt = document.createEvent("MouseEvents");
+      evt.initEvent("click", true, false);
+      elem.dispatchEvent(evt);
+    }
+  }
+
+  function deploy() {
+    document.getElementById("deployForm").submit();
+
+  }
+
+  function checkNumbers(id) {
+    inputs = document.getElementsByTagName('input');
+    for (index = 0; index < inputs.length; ++index) {
+      var el = inputs[index];
+      if (parseInt(el.value) < 0) {
+        el.value = 0;
+      }
+    }
+  }
+
+</script>
+
+<script src="/jquery-3.3.1.slim.min.js"></script>
+<script src="/popper.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

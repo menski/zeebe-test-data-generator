@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: head"/>
+<body>
+<nav th:replace="fragments/header :: navbar(title='Create Error Cases')"/>
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col-4">
+      <h1>Create Error Cases</h1>
+    </div>
+    <div class="col-4 text-right">
+      <button class="btn btn-outline-secondary" id="buttonSubmit" onclick="submit()"
+              type="button">Create
+      </button>
+    </div>
+  </div>
+  <hr/>
+
+  <p style="font-weight: 600;" th:text="'Process ID: ' + ${workflowName}"/>
+  <p style="font-weight: 600;" th:text="'Version: ' + ${workflowVersion}"/>
+
+  <form action="/create-errors" id="form" method="post" onchange="check()">
+    <div class="custom-control custom-switch">
+      <input class="custom-control-input" id="inputNoMoreRetries" name="noMoreRetries"
+             onchange="toggle('inputNoMoreRetries', 'textNoMoreRetries')" type="checkbox">
+      <label class="custom-control-label" for="inputNoMoreRetries">No more retries left
+        (Failing
+        Task)</label>
+      <div hidden id="textNoMoreRetries">
+      <textarea name="noMoreRetriesError" placeholder="Error Message"
+                style="width: 100%; margin-top: 0.5em"></textarea>
+      </div>
+    </div>
+    <div class="custom-control custom-switch">
+      <input class="custom-control-input checkme" id="inputIoMapping" name="ioMapping"
+             onchange="toggle('inputIoMapping', 'sectionIoMapping')" type="checkbox">
+      <label class="custom-control-label" for="inputIoMapping">I/O mapping error</label>
+      <div hidden id="sectionIoMapping">
+        <div class="form-check">
+          <input checked class="form-check-input" id="exampleRadios2"
+                 name="ioMappingVariable"
+                 type="radio" value="doesNotExist">
+          <label class="form-check-label" for="exampleRadios2">
+            Variable does not exist
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="custom-control custom-switch">
+      <input class="custom-control-input checkme" id="inputExtractValue" name="extractValue"
+             onchange="toggle('inputExtractValue', 'sectionExtractValue')" type="checkbox">
+      <label class="custom-control-label" for="inputExtractValue">Extract value error</label>
+      <div hidden id="sectionExtractValue">
+        <div class="form-check">
+          <input checked class="form-check-input" id="exampleRadios12" name="extractValueVariable"
+                 type="radio" value="wrongType">
+          <label class="form-check-label" for="exampleRadios12">
+            Type is wrong
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" id="exampleRadios22" name="extractValueVariable"
+                 type="radio"
+                 value="doesNotExist">
+          <label class="form-check-label" for="exampleRadios22">
+            Variable does not exist
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="custom-control custom-switch">
+      <input class="custom-control-input checkme" id="inputCondition" name="condition"
+             onchange="toggle('inputCondition', 'sectionCondition')" type="checkbox">
+      <label class="custom-control-label" for="inputCondition">Condition error</label>
+      <div hidden id="sectionCondition">
+        <div class="form-check">
+          <input checked class="form-check-input" id="exampleRadios13"
+                 name="conditionVariable"
+                 type="radio" value="wrongType">
+          <label class="form-check-label" for="exampleRadios13">
+            Type is wrong
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" id="exampleRadios23" name="conditionVariable"
+                 type="radio"
+                 value="doesNotExist">
+          <label class="form-check-label" for="exampleRadios23">
+            Variable does not exist
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <input hidden name="workflowId" th:value="${workflowId}"/>
+  </form>
+</div>
+
+<script>
+  function toggle(idEl, idTe) {
+    var el = document.getElementById(idEl);
+    document.getElementById(idTe).hidden = !el.checked;
+
+  }
+
+  function submit() {
+    document.getElementById("form").submit();
+  }
+
+  function check() {
+    inputs = document.getElementsByClassName('checkme');
+    document.getElementById("buttonSubmit").disabled = true;
+    for (index = 0; index < inputs.length; ++index) {
+      var el = inputs[index];
+      if (el.checked) {
+        document.getElementById("buttonSubmit").disabled = false;
+        break;
+      }
+    }
+  }
+</script>
+
+<script src="/jquery-3.3.1.slim.min.js"></script>
+<script src="/popper.min.js"></script>
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

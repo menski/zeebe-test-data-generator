@@ -1,0 +1,40 @@
+springfox.documentation.swagger.v2.path: /documentation
+camunda.operate:
+  elasticsearch:
+    clusterName: docker-cluster
+    host: localhost
+    port: 9200
+  zeebe:
+    brokerContactPoint: localhost:26500
+  zeebeElasticsearch:
+    clusterName: docker-cluster
+    host: localhost
+    port: 9200
+    prefix: zeebe-record
+logging:
+  level:
+    ROOT: INFO
+    org.camunda.operate: DEBUG
+management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,env
+---
+spring:
+  profiles: dev
+camunda.operate:
+  elasticsearch:
+    clusterName: docker-cluster
+    host: elasticsearch
+    port: 9200
+  zeebe:
+    brokerContactPoint: zeebe:26500
+  zeebeElasticsearch:
+    clusterName: docker-cluster
+    host: elasticsearch
+    port: 9200
+    prefix: zeebe-record
+logging:
+  level:
+    ROOT: INFO
+    org.camunda.operate: INFO
+management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,env
+# Enable or disable metrics
+#management.metrics.export.prometheus.enabled: false

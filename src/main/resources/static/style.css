@@ -1,0 +1,95 @@
+/* global @font-face declarations, should ideally be at the beginning of the built/compiled production css file (you will obviously have to update/adjust the file path for the font-files depending where you put them: */
+body {
+  background-color: #f2f3f5;
+}
+
+* {
+
+  color: #62626e !important;
+}
+
+table {
+  margin-bottom: 50px !important;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #b0bac7 !important;
+}
+.nav-pills .nav-link {
+  background-color: #d8dce3 !important;
+}
+
+.custom-switch {
+  margin-bottom: 1em;
+}
+
+.form-check {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.mynavbar {
+  height: 56px;
+  font-weight: 500;
+  margin-bottom: 70px;
+}
+
+.svgico {
+  fill: #62626e;
+  margin-right: 20px;
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: local('IBMPlexSans-Bold'), url('./fonts/IBMPlexSans-Bold.woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: local('IBMPlexSans-Italic'), url('./fonts/IBMPlexSans-Italic.woff2');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: local('IBMPlexSans-Medium'), url('./fonts/IBMPlexSans-Medium.woff2');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: local('IBMPlexSans-Regular'), url('./fonts/IBMPlexSans-Regular.woff2');
+}
+
+@font-face {
+  font-family: 'IBMPlexSans';
+  src: local('IBMPlexSans-SemiBold'), url('./fonts/IBMPlexSans-SemiBold.woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'IBMPlexMono';
+  src: local('IBMPlexMono-Regular'), url('./fonts/IBMPlexMono-Regular.woff2');
+}
+
+/* enable anti-aliasing: */
+html {
+  -moz-osx-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* use Plex per default, set body margins and paddings to 0 while at it :) */
+body {
+  font-family: IBMPlexSans;
+  margin: 0;
+  padding: 0;
+}
+
+/* also use Plex for buttons: */
+
+button {
+  font-family: IBMPlexSans;
+  cursor: pointer;
+  border-width: 0;
+}
